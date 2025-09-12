@@ -16,20 +16,23 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        val weatherApiKey: String? = project.findProperty("WEATHER_API_KEY") as String?
-        buildConfigField("String", "WEATHER_API_KEY", "\"${weatherApiKey ?: "YOUR_API_KEY_HERE"}\"")
 
+        val weatherApiKey: String? = project.findProperty("WEATHER_API_KEY") as String?
+            ?: throw GradleException("WEATHER_API_KEY is missing. Please add it in gradle.properties")
+
+        buildConfigField("String", "WEATHER_API_KEY", "\"$weatherApiKey\"")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -44,34 +47,14 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6") // Stable ViewModel + coroutines
     implementation(libs.androidx.activity.compose)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-
-    // Koin
-    val koinVersion = "4.1.0"
-    implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose-navigation:$koinVersion")
-
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
-    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-
-    //viewmodel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.3")
 }
