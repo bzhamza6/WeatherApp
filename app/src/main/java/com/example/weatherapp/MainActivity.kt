@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.weatherapp.navigation.NavigationGraph
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,13 +17,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                HomeScreen()
+               val navController = rememberNavController()
+                NavigationGraph(navController)
             }
         }
     }
-}
-
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    Text("Hello Weather")
 }
