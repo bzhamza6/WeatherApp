@@ -19,6 +19,8 @@ class MainActivity : ComponentActivity() {
             WeatherAppTheme {
                val navController = rememberNavController()
                 NavigationGraph(navController)
+                //this is just for test DISCORD Webhok
+                println("hello Weather APP")
             }
         }
     }
