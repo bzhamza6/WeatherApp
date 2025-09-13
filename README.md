@@ -11,7 +11,7 @@ It fetches real-time weather updates and displays current conditions with a mini
 - 📊 Display **temperature, humidity, wind speed, pressure**.  
 - 🎨 Clean and modern **Jetpack Compose UI**.   
 - ⚡ Fast & responsive.  
-this is for test
+
 ---
 
 ## 🛠️ Tech Stack
