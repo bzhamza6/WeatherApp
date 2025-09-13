@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                val navController = rememberNavController()
                 NavigationGraph(navController)
 
-                
+
                 println("hello Weather APP")
             }
         }
