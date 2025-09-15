@@ -62,5 +62,12 @@ dependencies {
     // مكتبة الأيقونات (الأساسية + الممتدة)
     implementation ("androidx.compose.material:material-icons-core:1.7.8")
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
-    
+
+    // Compose + Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.3")
+
+    // Retrofit + OkHttp
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
 }
