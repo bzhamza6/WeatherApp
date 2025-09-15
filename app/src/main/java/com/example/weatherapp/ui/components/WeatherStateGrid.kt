@@ -1,44 +1,34 @@
 package com.example.weatherapp.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Air
-import androidx.compose.material.icons.filled.Cloud
-import androidx.compose.material.icons.filled.Thermostat
-import androidx.compose.material.icons.filled.WaterDrop
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
+// 🟢 WeatherStateGrid Composable
+// ➤ Purpose: Displays a 2x2 grid of weather information (Humidity, Wind, Rain Chance, Feels Like).
+// ➤ Each item is represented by a WeatherCard with an icon, title, and value.
+// ➤ Designed to give the user a quick overview of key weather metrics.
 
 @Composable
 fun WeatherStateGrid(
-    humedity: String,
-    wind: String,
-    rain: String,
-    feelsL: String,
+    humedity: String, // 💧 Humidity percentage
+    wind: String,     // 🌬️ Wind speed in km/h
+    rain: String,     // 🌧️ Chance of rain in %
+    feelsL: String,   // 🌡️ "Feels Like" temperature
 ) {
     Column(
-    modifier = Modifier.fillMaxWidth(),
-    verticalArrangement = Arrangement.spacedBy(8.dp)
-    )
-    {
-        // الصف الأول: Humidity + Wind
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp) // 📏 Space between rows
+    ) {
+        // 🔸 First row: Humidity + Wind
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // 📏 Space between cards
         ) {
             WeatherCard(
                 title = "HUMIDITY",
@@ -47,10 +37,10 @@ fun WeatherStateGrid(
                     Icon(
                         Icons.Default.WaterDrop,
                         contentDescription = "Humidity",
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.primary // 🎨 Blue-ish for water
                     )
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f) // ⚖️ Equal width for both cards
             )
             WeatherCard(
                 title = "WIND",
@@ -59,14 +49,14 @@ fun WeatherStateGrid(
                     Icon(
                         Icons.Default.Air,
                         contentDescription = "Wind",
-                        tint = MaterialTheme.colorScheme.secondary
+                        tint = MaterialTheme.colorScheme.secondary // 🎨 Different accent color
                     )
                 },
                 modifier = Modifier.weight(1f)
             )
         }
 
-        // الصف الثاني: Rain + Feels Like
+        // 🔸 Second row: Chance of Rain + Feels Like
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -90,7 +80,7 @@ fun WeatherStateGrid(
                     Icon(
                         Icons.Default.Thermostat,
                         contentDescription = "Feels Like",
-                        tint = MaterialTheme.colorScheme.error
+                        tint = MaterialTheme.colorScheme.error // 🔴 Uses error color for temperature
                     )
                 },
                 modifier = Modifier.weight(1f)
@@ -99,31 +89,35 @@ fun WeatherStateGrid(
     }
 }
 
+// 🟢 WeatherCard Composable
+// ➤ Purpose: Small reusable card showing a weather metric with icon + title + value.
+// ➤ Used inside WeatherStateGrid for each weather parameter.
+
 @Composable
 fun WeatherCard(
-    title: String,
-    value: String,
-    icon: @Composable () -> Unit,
+    title: String,              // 🏷️ Title of the metric (e.g., "HUMIDITY")
+    value: String,              // 📊 Metric value (e.g., "72%")
+    icon: @Composable () -> Unit, // 🎨 Icon representing the metric
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .padding(4.dp)
-            .height(120.dp),
+            .height(120.dp), // 📏 Fixed card height for consistent UI
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surface // 🎨 Background color
         ),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp) // 🖼️ Slight shadow for depth
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween // 🏗️ Distribute icon/title + value vertically
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                icon()
+                icon() // 🎨 Displays the weather metric icon
                 Text(
                     text = title,
                     style = MaterialTheme.typography.labelSmall.copy(
@@ -134,6 +128,7 @@ fun WeatherCard(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // 📊 Main value (e.g., 23°, 70%, 15km/h)
             Text(
                 text = value,
                 style = MaterialTheme.typography.titleLarge.copy(
