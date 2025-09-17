@@ -2,11 +2,13 @@ package com.example.weatherapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.weatherapp.ui.screen.HomeScreen
 import com.example.weatherapp.viewmodel.WeatherForecastViewModel
+import com.example.weatherapp.ui.screen.SearchScreen
 
 /**
  * 🟢 NavigationGraph
@@ -46,5 +48,7 @@ fun NavigationGraph(
                 viewModelfc = viewModelForecast
             )
         }
+        composable(ROUTES.SEARCH_SCREEN) { SearchScreen() }
     }
+
 }
