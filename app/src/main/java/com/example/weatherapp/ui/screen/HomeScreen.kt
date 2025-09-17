@@ -15,6 +15,9 @@ import androidx.navigation.NavController
 import com.example.weatherapp.data.model.HourDto
 import com.example.weatherapp.ui.components.*
 import com.example.weatherapp.viewmodel.WeatherForecastViewModel
+import com.example.weatherapp.navigation.ROUTES
+import com.example.weatherapp.ui.components.CurrentWeatherCard
+import com.example.weatherapp.ui.components.HourlyForecastCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,8 +61,8 @@ fun HomeScreen(
                         // 🏷️ Center title
                         Text(text = "Today", color = Color.Black)
 
-                        // 📂 Button: Open saved locations
-                        IconButton(onClick = { /* TODO: Open Saved Locations Screen */ }) {
+                        // Button: Show saved locations menu
+                        IconButton(onClick = { navController.navigate(ROUTES.SEARCH_SCREEN) }) {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 contentDescription = "Menu"
